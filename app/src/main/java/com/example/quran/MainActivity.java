@@ -10,6 +10,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -17,7 +20,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         DataObject dataObject = new DataObject();
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_list_item_1,dataObject.GetSurahNames());
+        List<Names> array = new ArrayList<>();
+        for(int i=0; i< dataObject.englishSurahNames.length; i++){
+
+            Names temp = new Names();
+            temp.eng = dataObject.englishSurahNames[i];
+            temp.urdu = dataObject.urduSurahNames[i];
+            array.add(temp);
+
+        }
+        MainAdapter arrayAdapter = new MainAdapter(MainActivity.this, android.R.layout.simple_list_item_1,array);
         ListView listView = findViewById(R.id.listSurah);
         listView.setAdapter(arrayAdapter);
 
@@ -25,7 +37,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 int start = dataObject.getSurahStart(i);
-                int end = dataObject.getSurahStart(i+1);
+                int end;
+                try{
+                    end = dataObject.getSurahStart(i+1);
+                }catch (Exception e){
+                    end = DataObject.QuranArabicText.length+1;
+                }
                 Intent intent = new Intent(MainActivity.this, VerseActivity.class);
                 intent.putExtra("Start", start);
                 intent.putExtra("End",end);
