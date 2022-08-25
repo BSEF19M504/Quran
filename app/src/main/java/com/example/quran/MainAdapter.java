@@ -20,7 +20,7 @@ public class MainAdapter extends ArrayAdapter {
         @NonNull
         @Override
         public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-            Names chapter = (Names) getItem(position);
+            SurahNames chapter = (SurahNames) getItem(position);
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.surah_layout,null,true);
 
             TextView textView1 = convertView.findViewById(R.id.textView);

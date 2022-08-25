@@ -6,9 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,10 +18,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         DataObject dataObject = new DataObject();
-        List<Names> array = new ArrayList<>();
+        List<SurahNames> array = new ArrayList<>();
         for(int i=0; i< dataObject.englishSurahNames.length; i++){
 
-            Names temp = new Names();
+            SurahNames temp = new SurahNames();
             temp.eng = dataObject.englishSurahNames[i];
             temp.urdu = dataObject.urduSurahNames[i];
             array.add(temp);
