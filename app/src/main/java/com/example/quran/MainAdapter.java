@@ -27,6 +27,9 @@ public class MainAdapter extends ArrayAdapter {
             textView1.setText(chapter.getEng());
             TextView textView2 = convertView.findViewById(R.id.textView2);
             textView2.setText(chapter.getUrdu());
+            TextView textView3 = convertView.findViewById(R.id.textView3);
+            String num = Integer.toString(position+1);
+            textView3.setText(num);
 
             return convertView;
         }
