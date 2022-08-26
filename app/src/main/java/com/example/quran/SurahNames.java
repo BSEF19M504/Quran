@@ -5,6 +5,12 @@ public class SurahNames {
     String eng;
     int id;
 
+    public SurahNames(String urdu, String eng, int id) {
+        this.urdu = urdu;
+        this.eng = eng;
+        this.id = id;
+    }
+
     public String getUrdu() {
         return urdu;
     }

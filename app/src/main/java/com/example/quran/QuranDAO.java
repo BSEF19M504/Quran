@@ -39,4 +39,33 @@ public class QuranDAO extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
 
     }
+
+    public ArrayList<SurahNames> getSurahNames() {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursorSurah = db.rawQuery("SELECT * FROM " + SURAH_TABLE, null);
+
+        ArrayList<SurahNames> surahArrayList = new ArrayList<>();
+
+        // moving our cursor to first position.
+        if (cursorSurah.moveToFirst()) {
+            do {
+                int nameE, nameU, id;
+                nameU = cursorSurah.getColumnIndex("SurahNameU");
+                nameE = cursorSurah.getColumnIndex("SurahNameE");
+                id = cursorSurah.getColumnIndex("SurahID");
+                String nameEng = cursorSurah.getString(nameE);
+                nameEng = nameEng.split("\\(")[0];
+                surahArrayList.add(new SurahNames(cursorSurah.getString(nameU),
+                        nameEng,
+                        cursorSurah.getInt(id)));
+            } while (cursorSurah.moveToNext());
+
+        }
+
+        cursorSurah.close();
+        return surahArrayList;
+    }
+
 }
