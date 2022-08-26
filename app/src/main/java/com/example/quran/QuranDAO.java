@@ -27,7 +27,7 @@ public class QuranDAO extends SQLiteOpenHelper {
 
 
     public QuranDAO(@Nullable Context context) {
-        super(context, "QuranDB.db", null, 1);
+        super(context, "Quran.db", null, 1);
     }
 
     @Override
