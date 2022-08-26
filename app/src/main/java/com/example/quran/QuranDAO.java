@@ -68,4 +68,31 @@ public class QuranDAO extends SQLiteOpenHelper {
         return surahArrayList;
     }
 
+    public ArrayList<String> getAyatBySurah(int id){
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursorAyat;
+        if(id == 9){
+            cursorAyat = db.rawQuery("SELECT * FROM " + AYAT_TABLE + " WHERE " + SURAH_ID + "=" + id,null);
+        }
+        else {
+            cursorAyat = db.rawQuery("SELECT * FROM " + AYAT_TABLE + " WHERE " + SURAH_ID + "=" + id + " OR " + AYAT_ID + "=1",null);
+        }
+
+        ArrayList<String> ayatArrayList = new ArrayList<>();
+
+        // moving our cursor to first position.
+        if (cursorAyat.moveToFirst()) {
+            do {
+                int arabic;
+                arabic = cursorAyat.getColumnIndex(ARABIC);
+                ayatArrayList.add(cursorAyat.getString(arabic));
+            } while (cursorAyat.moveToNext());
+
+        }
+
+        cursorAyat.close();
+        return ayatArrayList;
+    }
 }

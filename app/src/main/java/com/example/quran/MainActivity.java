@@ -17,7 +17,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        DataObject dataObject = new DataObject();
         QuranDAO quranDAO = new QuranDAO(this);
         List<SurahNames> array = quranDAO.getSurahNames();
         MainAdapter arrayAdapter = new MainAdapter(MainActivity.this, android.R.layout.simple_list_item_1,array);
@@ -27,16 +26,9 @@ public class MainActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                int start = dataObject.getSurahStart(i);
-                int end;
-                try{
-                    end = dataObject.getSurahStart(i+1);
-                }catch (Exception e){
-                    end = DataObject.QuranArabicText.length+1;
-                }
+                SurahNames surah = (SurahNames) arrayAdapter.getItem(i);
                 Intent intent = new Intent(MainActivity.this, VerseActivity.class);
-                intent.putExtra("Start", start);
-                intent.putExtra("End",end);
+                intent.putExtra("SurahId",surah.getId());
                 startActivity(intent);
             }
         });
