@@ -18,16 +18,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         DataObject dataObject = new DataObject();
-        List<SurahNames> array = new ArrayList<>();
         QuranDAO quranDAO = new QuranDAO(this);
-        for(int i=0; i< dataObject.englishSurahNames.length; i++){
-
-            SurahNames temp = new SurahNames();
-            temp.eng = dataObject.englishSurahNames[i];
-            temp.urdu = dataObject.urduSurahNames[i];
-            array.add(temp);
-
-        }
+        List<SurahNames> array = quranDAO.getSurahNames();
         MainAdapter arrayAdapter = new MainAdapter(MainActivity.this, android.R.layout.simple_list_item_1,array);
         ListView listView = findViewById(R.id.listSurah);
         listView.setAdapter(arrayAdapter);
