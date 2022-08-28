@@ -22,14 +22,14 @@ public class VerseActivity extends AppCompatActivity {
         String key = intent.getStringExtra("key");
         QuranDAO quranDAO = new QuranDAO(this);
 
-        ArrayList<String> verses;
+        ArrayList<Ayat> verses;
         if(key.equals("Surah")){
             verses = quranDAO.getAyatBySurah(id);
         }
         else{
             verses = quranDAO.getAyatByParah(id);
         }
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(VerseActivity.this, android.R.layout.simple_list_item_1,verses);
+        AyatAdapter arrayAdapter = new AyatAdapter(VerseActivity.this, android.R.layout.simple_list_item_1,verses);
         ListView listView = findViewById(R.id.listVerse);
         listView.setAdapter(arrayAdapter);
     }
