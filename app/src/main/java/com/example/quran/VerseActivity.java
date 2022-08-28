@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,6 +20,7 @@ public class VerseActivity extends AppCompatActivity {
         Intent intent = getIntent();
         int id = intent.getIntExtra("SurahId",-1);
         int translate = intent.getIntExtra("translate",0);
+        String name = intent.getStringExtra("Name");
 
         String key = intent.getStringExtra("key");
         QuranDAO quranDAO = new QuranDAO(this);
@@ -31,6 +33,8 @@ public class VerseActivity extends AppCompatActivity {
         else{
             verses = quranDAO.getAyatByParah(id);
         }
+        TextView textView = findViewById(R.id.verseTitle);
+        textView.setText(name);
         AyatAdapter arrayAdapter = new AyatAdapter(VerseActivity.this, android.R.layout.simple_list_item_1,verses);
         ListView listView = findViewById(R.id.listVerse);
         listView.setAdapter(arrayAdapter);

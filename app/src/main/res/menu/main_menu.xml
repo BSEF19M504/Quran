@@ -13,11 +13,6 @@
             android:title="@string/parah_list" />
         <!--android:icon="@drawable/return"-->
 
-        <item
-            android:id="@+id/surah_info"
-            android:title="@string/surah_info" />
-        <!--android:icon="@drawable/laptop"-->
-
     </group>
 
 

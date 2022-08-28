@@ -87,13 +87,6 @@ public class StartingActivity extends AppCompatActivity {
                         startActivity(intent);
                         drawerLayout.closeDrawer(GravityCompat.START);
                         break;
-
-                    case R.id.surah_info:
-
-                        //Toast.makeText(StartingActivity.this, Integer.toString(num), Toast.LENGTH_SHORT).show();
-                        //Toast.makeText(getApplicationContext(),"Laptop is clicked",Toast.LENGTH_LONG).show();
-                        //drawerLayout.closeDrawer(GravityCompat.START);
-                        break;
                 }
 
                 return true;
