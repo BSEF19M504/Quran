@@ -40,36 +40,7 @@ public class StartingActivity extends AppCompatActivity {
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
 
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem)
-            {
-                Intent intent;
-                switch (menuItem.getItemId())
-                {
-                    case R.id.surah_list:
-                        intent = new Intent(StartingActivity.this, MainActivity.class);
-                        intent.putExtra("key","Surah");
-                        startActivity(intent);
-                        //drawerLayout.closeDrawer(GravityCompat.START);
-                        break;
-
-                    case R.id.parah_list:
-                        intent = new Intent(StartingActivity.this, MainActivity.class);
-                        intent.putExtra("key","Parah");
-                        startActivity(intent);
-                        break;
-
-                    case R.id.surah_info:
-                        Toast.makeText(getApplicationContext(),"Laptop is clicked",Toast.LENGTH_LONG).show();
-                        drawerLayout.closeDrawer(GravityCompat.START);
-                        break;
-                }
-
-                return true;
-            }
-        });
 
         String [] lang = {"English","Urdu"};
         String [] engNames = {"Dr Mohsin Khan","Mufti Taqi Usmani"};
@@ -88,6 +59,44 @@ public class StartingActivity extends AppCompatActivity {
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem)
+            {
+                Intent intent;
+                String translate = Integer.toString(spinner2.getSelectedItemPosition()) + spinner1.getSelectedItemPosition();
+                int num = Integer.parseInt(translate,2);
+                switch (menuItem.getItemId())
+                {
+                    case R.id.surah_list:
+                        intent = new Intent(StartingActivity.this, MainActivity.class);
+                        intent.putExtra("key","Surah");
+                        intent.putExtra("translate",num);
+                        startActivity(intent);
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        break;
+
+                    case R.id.parah_list:
+                        intent = new Intent(StartingActivity.this, MainActivity.class);
+                        intent.putExtra("key","Parah");
+                        intent.putExtra("translate",num);
+                        startActivity(intent);
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        break;
+
+                    case R.id.surah_info:
+
+                        //Toast.makeText(StartingActivity.this, Integer.toString(num), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(),"Laptop is clicked",Toast.LENGTH_LONG).show();
+                        //drawerLayout.closeDrawer(GravityCompat.START);
+                        break;
+                }
+
+                return true;
             }
         });
 

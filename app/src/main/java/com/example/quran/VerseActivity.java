@@ -18,9 +18,11 @@ public class VerseActivity extends AppCompatActivity {
         setContentView(R.layout.activity_verse);
         Intent intent = getIntent();
         int id = intent.getIntExtra("SurahId",-1);
+        int translate = intent.getIntExtra("translate",0);
 
         String key = intent.getStringExtra("key");
         QuranDAO quranDAO = new QuranDAO(this);
+        quranDAO.setTranslation(translate);
 
         ArrayList<Ayat> verses;
         if(key.equals("Surah")){

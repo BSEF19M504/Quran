@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
         QuranDAO quranDAO = new QuranDAO(this);
         Intent intent = getIntent();
         String key = intent.getStringExtra("key");
+        int translate = intent.getIntExtra("translate",0);
         List<SurahNames> array;
         if(key.equals("Surah")){
             array = quranDAO.getSurahNames();
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
                 SurahNames surah = (SurahNames) arrayAdapter.getItem(i);
                 Intent intent = new Intent(MainActivity.this, VerseActivity.class);
                 intent.putExtra("SurahId",surah.getId());
+                intent.putExtra("translate",translate);
                 intent.putExtra("key",key);
                 startActivity(intent);
             }
