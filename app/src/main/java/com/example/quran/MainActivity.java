@@ -39,6 +39,12 @@ public class MainActivity extends AppCompatActivity {
                 SurahNames surah = (SurahNames) arrayAdapter.getItem(i);
                 Intent intent = new Intent(MainActivity.this, VerseActivity.class);
                 intent.putExtra("SurahId",surah.getId());
+                if(translate%2 == 0){
+                    intent.putExtra("Name",array.get(i).getEng());
+                }
+                else{
+                    intent.putExtra("Name",array.get(i).getUrdu());
+                }
                 intent.putExtra("translate",translate);
                 intent.putExtra("key",key);
                 startActivity(intent);

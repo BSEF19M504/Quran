@@ -28,14 +28,15 @@ public class AyatAdapter extends ArrayAdapter {
         TextView textView2 = convertView.findViewById(R.id.textView2);
         textView2.setText(ayat.getTranslate());
         TextView textView3 = convertView.findViewById(R.id.textView3);
-        if(ayat.getAyatNo() == 0)
-            return convertView;
         String num;
         if(ayat.getSurahId() == 1)
             num = Integer.toString(ayat.getAyatNo()-1);
         else
             num = Integer.toString(ayat.getAyatNo());
         textView3.setText(num);
+
+        if(ayat.getAyatNo() == 0)
+            textView3.setVisibility(View.INVISIBLE);
 
         return convertView;
     }
