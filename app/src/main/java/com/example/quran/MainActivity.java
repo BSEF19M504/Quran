@@ -18,7 +18,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         QuranDAO quranDAO = new QuranDAO(this);
-        List<SurahNames> array = quranDAO.getSurahNames();
+        Intent intent = getIntent();
+        String key = intent.getStringExtra("key");
+        List<SurahNames> array;
+        if(key.equals("Surah")){
+            array = quranDAO.getSurahNames();
+        }
+        else{
+            array = quranDAO.getParahNames();
+        }
+
         MainAdapter arrayAdapter = new MainAdapter(MainActivity.this, android.R.layout.simple_list_item_1,array);
         ListView listView = findViewById(R.id.listSurah);
         listView.setAdapter(arrayAdapter);

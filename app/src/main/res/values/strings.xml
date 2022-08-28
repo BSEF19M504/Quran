@@ -3,4 +3,13 @@
     <string name="al_quran">Al-Quran</string>
     <string name="open">Opening</string>
     <string name="close">Closing</string>
+    <string name="readability">Readability</string>
+    <string name="translation_english">Translation English</string>
+    <string name="translation_urdu">Translation Urdu</string>
+    <string name="parah_list">Parah List</string>
+    <string name="surah_info">Surah Info</string>
+    <string name="surah_list">Surah List</string>
+    <string name="closer_to_allah">Closer to Allah</string>
+    <string name="language">Language</string>
+    <string name="author">Author</string>
 </resources>

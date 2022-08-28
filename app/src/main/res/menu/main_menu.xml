@@ -1,60 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_book"
-            android:title="Book" />
+            android:id="@+id/surah_list"
+            android:title="@string/surah_list" />
         <!--android:icon="@drawable/book" -->
 
         <item
-            android:id="@+id/nav_return"
-            android:title="Return" />
+            android:id="@+id/parah_list"
+            android:title="@string/parah_list" />
         <!--android:icon="@drawable/return"-->
 
         <item
-            android:id="@+id/nav_laptop"
-            android:title="Laptop" />
+            android:id="@+id/surah_info"
+            android:title="@string/surah_info" />
         <!--android:icon="@drawable/laptop"-->
-
-        <item
-            android:id="@+id/nav_voice"
-            android:title="Voice" />
-        <!--android:icon="@drawable/voice"-->
 
     </group>
 
 
-    <item android:title="Reading">
+    <item android:title="@string/readability">
         <menu>
             <group android:checkableBehavior="single">
                 <item
-                    android:id="@+id/nav_chrome_reader"
-                    android:title="Chrome Reader" />
+                    android:id="@+id/translate_lang"
+                    android:title="@string/language"
+                    app:actionLayout="@layout/spinner"/>
                 <!--android:icon="@drawable/chrome_reader"-->
                 <item
-                    android:id="@+id/nav_rea_more"
-                    android:title="Read More" />
+                    android:id="@+id/translate_author"
+                    android:title="@string/author"
+                    app:actionLayout="@layout/spinner"/>
                 <!--android:icon="@drawable/read_more"-->
             </group>
         </menu>
     </item>
-
-    <item android:title="Comments">
-        <menu>
-            <group android:checkableBehavior="single">
-                <item
-                    android:id="@+id/Nav_add_comment"
-                    android:title="Add Comment" />
-                <!--android:icon="@drawable/add_comment"-->
-                <item
-                    android:id="@+id/nav_insert_comment"
-                    android:title="Insert Comment" />
-                <!--android:icon="@drawable/insert_comment"-->
-            </group>
-        </menu>
-    </item>
-
 
 
 </menu>

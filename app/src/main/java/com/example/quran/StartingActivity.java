@@ -10,6 +10,10 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
@@ -41,32 +45,24 @@ public class StartingActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem)
             {
+                Intent intent;
                 switch (menuItem.getItemId())
                 {
-                    case R.id.nav_book :
-                        Toast.makeText(getApplicationContext(),"Retur is Clicked",Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(StartingActivity.this, MainActivity.class);
+                    case R.id.surah_list:
+                        intent = new Intent(StartingActivity.this, MainActivity.class);
+                        intent.putExtra("key","Surah");
                         startActivity(intent);
                         //drawerLayout.closeDrawer(GravityCompat.START);
                         break;
 
-                    case R.id.nav_return :
-                        Toast.makeText(getApplicationContext(),"Retur is Clicked",Toast.LENGTH_LONG).show();
-                        //drawerLayout.closeDrawer(GravityCompat.START);
+                    case R.id.parah_list:
+                        intent = new Intent(StartingActivity.this, MainActivity.class);
+                        intent.putExtra("key","Parah");
+                        startActivity(intent);
                         break;
 
-                    case R.id.nav_laptop :
+                    case R.id.surah_info:
                         Toast.makeText(getApplicationContext(),"Laptop is clicked",Toast.LENGTH_LONG).show();
-                        drawerLayout.closeDrawer(GravityCompat.START);
-                        break;
-
-                    case R.id.nav_voice :
-                        Toast.makeText(getApplicationContext(),"Voice is clicked",Toast.LENGTH_LONG).show();
-                        drawerLayout.closeDrawer(GravityCompat.START);
-                        break;
-
-                    case R.id.nav_chrome_reader :
-                        Toast.makeText(getApplicationContext(),"Chrome Reader is clicked",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         break;
                 }
@@ -74,6 +70,27 @@ public class StartingActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+        String [] lang = {"English","Urdu"};
+        String [] engNames = {"Dr Mohsin Khan","Mufti Taqi Usmani"};
+        String [] urduNames = {"Fateh Muhammad Jalandhri","Mehmood-ul-Hassan"};
+
+        Spinner spinner1 = (Spinner) navigationView.getMenu().findItem(R.id.translate_lang).getActionView();
+        Spinner spinner2 = (Spinner) navigationView.getMenu().findItem(R.id.translate_author).getActionView();
+        spinner1.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item, lang));
+        spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(position == 0)
+                    spinner2.setAdapter(new ArrayAdapter<String>(StartingActivity.this,android.R.layout.simple_spinner_dropdown_item, engNames));
+                else if(position == 1)
+                    spinner2.setAdapter(new ArrayAdapter<String>(StartingActivity.this,android.R.layout.simple_spinner_dropdown_item, urduNames));
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
     }
 
     @Override
