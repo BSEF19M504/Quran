@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
                 SurahNames surah = (SurahNames) arrayAdapter.getItem(i);
                 Intent intent = new Intent(MainActivity.this, VerseActivity.class);
                 intent.putExtra("SurahId",surah.getId());
+                intent.putExtra("key",key);
                 startActivity(intent);
             }
         });
