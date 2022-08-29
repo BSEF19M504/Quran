@@ -1,6 +1,7 @@
 package com.example.quran;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,9 @@ public class MainAdapter extends ArrayAdapter {
             TextView textView3 = convertView.findViewById(R.id.textView3);
             String num = Integer.toString(chapter.getId());
             textView3.setText(num);
+
+            textView2.setTypeface(Typeface.createFromAsset(getContext().getAssets(), "fonts/noorehuda.ttf"));
+            textView1.setTypeface(Typeface.createFromAsset(getContext().getAssets(), "fonts/Jameel Noori Nastaleeq.ttf"));
 
             return convertView;
         }

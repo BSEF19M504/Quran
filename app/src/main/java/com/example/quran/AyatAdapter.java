@@ -1,6 +1,7 @@
 package com.example.quran;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +38,9 @@ public class AyatAdapter extends ArrayAdapter {
 
         if(ayat.getAyatNo() == 0)
             textView3.setVisibility(View.INVISIBLE);
+
+        textView1.setTypeface(Typeface.createFromAsset(getContext().getAssets(), "fonts/noorehuda.ttf"));
+        textView2.setTypeface(Typeface.createFromAsset(getContext().getAssets(), "fonts/Jameel Noori Nastaleeq.ttf"));
 
         return convertView;
     }

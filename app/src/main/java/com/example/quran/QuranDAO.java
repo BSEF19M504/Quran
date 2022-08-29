@@ -100,10 +100,10 @@ public class QuranDAO extends SQLiteAssetHelper {
 
         Cursor cursorAyat;
         if(id == 9){
-            cursorAyat = db.rawQuery("SELECT * FROM " + AYAT_TABLE + " WHERE " + SURAH_ID + "=" + id,null);
+            cursorAyat = db.rawQuery("SELECT * FROM " + AYAT_TABLE + " WHERE " + SURAH_ID + "=" + id + " ORDER BY " + AYAT_ID,null);
         }
         else {
-            cursorAyat = db.rawQuery("SELECT * FROM " + AYAT_TABLE + " WHERE " + SURAH_ID + "=" + id + " OR " + AYAT_ID + "=1",null);
+            cursorAyat = db.rawQuery("SELECT * FROM " + AYAT_TABLE + " WHERE " + SURAH_ID + "=" + id + " OR " + AYAT_ID + "=1 ORDER BY " + AYAT_ID,null);
         }
 
         ArrayList<Ayat> ayatArrayList = new ArrayList<>();
@@ -136,7 +136,7 @@ public class QuranDAO extends SQLiteAssetHelper {
         ArrayList<Ayat> ayatArrayList = new ArrayList<>();
         Cursor cursorAyat;
         if(id == 10){
-            cursorAyat = db.rawQuery("SELECT * FROM " + AYAT_TABLE + " WHERE " + PARAH_ID + "=" + id,null);
+            cursorAyat = db.rawQuery("SELECT * FROM " + AYAT_TABLE + " WHERE " + PARAH_ID + "=" + id + " ORDER BY " + AYAT_ID,null);
             if (cursorAyat.moveToFirst()) {
                 do {
                     int arabic = cursorAyat.getColumnIndex(ARABIC);
@@ -161,7 +161,7 @@ public class QuranDAO extends SQLiteAssetHelper {
             else{
                 op="=";
             }
-            cursorAyat = db.rawQuery("SELECT * FROM " + AYAT_TABLE + " WHERE " + PARAH_ID + "" + op + "" + id + " GROUP BY " + SURAH_ID,null);
+            cursorAyat = db.rawQuery("SELECT * FROM " + AYAT_TABLE + " WHERE " + PARAH_ID + "" + op + "" + id + " GROUP BY " + SURAH_ID + " ORDER BY " + AYAT_ID,null);
             ArrayList<Integer> idList = new ArrayList<>();
             if (cursorAyat.moveToFirst()) {
                 do {
@@ -179,7 +179,7 @@ public class QuranDAO extends SQLiteAssetHelper {
             int translate = cursorAyat.getColumnIndex(TRANSLATE[Translation]);
             bismillah = new Ayat(cursorAyat.getString(initial), cursorAyat.getString(translate),0,1);
             for (int newID: idList.toArray(new Integer[0])) {
-                cursorAyat = db.rawQuery("SELECT * FROM " + AYAT_TABLE + " WHERE " + PARAH_ID + "" + op + "" + id + " AND " + SURAH_ID + "=" + newID,null);
+                cursorAyat = db.rawQuery("SELECT * FROM " + AYAT_TABLE + " WHERE " + PARAH_ID + "" + op + "" + id + " AND " + SURAH_ID + "=" + newID + " ORDER BY " + AYAT_ID,null);
                 if (cursorAyat.moveToFirst()) {
                     do {
                         int ayatNo = cursorAyat.getColumnIndex("AyaNo");
