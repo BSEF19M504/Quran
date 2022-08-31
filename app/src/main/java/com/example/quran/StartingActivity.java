@@ -40,27 +40,14 @@ public class StartingActivity extends AppCompatActivity {
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-
-
-        String [] lang = {"English","Urdu"};
         String [] engNames = {"Dr Mohsin Khan","Mufti Taqi Usmani"};
         String [] urduNames = {"Fateh Muhammad Jalandhri","Mehmood-ul-Hassan"};
 
-        Spinner spinner1 = (Spinner) navigationView.getMenu().findItem(R.id.translate_lang).getActionView();
-        Spinner spinner2 = (Spinner) navigationView.getMenu().findItem(R.id.translate_author).getActionView();
-        spinner1.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item, lang));
-        spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(position == 0)
-                    spinner2.setAdapter(new ArrayAdapter<String>(StartingActivity.this,android.R.layout.simple_spinner_dropdown_item, engNames));
-                else if(position == 1)
-                    spinner2.setAdapter(new ArrayAdapter<String>(StartingActivity.this,android.R.layout.simple_spinner_dropdown_item, urduNames));
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
+        Spinner spinner1 = (Spinner) navigationView.getMenu().findItem(R.id.translate_eng).getActionView();
+        Spinner spinner2 = (Spinner) navigationView.getMenu().findItem(R.id.translate_urdu).getActionView();
+        spinner1.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item, engNames));
+        spinner2.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item, urduNames));
+
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
 
@@ -68,14 +55,15 @@ public class StartingActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem)
             {
                 Intent intent;
-                String translate = Integer.toString(spinner2.getSelectedItemPosition()) + spinner1.getSelectedItemPosition();
-                int num = Integer.parseInt(translate,2);
+                int eng = spinner1.getSelectedItemPosition();
+                int urdu = spinner2.getSelectedItemPosition();
                 switch (menuItem.getItemId())
                 {
                     case R.id.surah_list:
                         intent = new Intent(StartingActivity.this, MainActivity.class);
                         intent.putExtra("key","Surah");
-                        intent.putExtra("translate",num);
+                        intent.putExtra("translateEng",eng);
+                        intent.putExtra("translateUrdu",urdu);
                         startActivity(intent);
                         drawerLayout.closeDrawer(GravityCompat.START);
                         break;
@@ -83,7 +71,8 @@ public class StartingActivity extends AppCompatActivity {
                     case R.id.parah_list:
                         intent = new Intent(StartingActivity.this, MainActivity.class);
                         intent.putExtra("key","Parah");
-                        intent.putExtra("translate",num);
+                        intent.putExtra("translateEng",eng);
+                        intent.putExtra("translateUrdu",urdu);
                         startActivity(intent);
                         drawerLayout.closeDrawer(GravityCompat.START);
                         break;

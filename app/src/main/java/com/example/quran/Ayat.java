@@ -4,7 +4,8 @@ public class Ayat {
     private int ayatId;
     private int surahId;
     private String arabic;
-    private String translate;
+    private String translateEng;
+    private String translateUrdu;
     private int parahId;
     private int ayatNo;
 
@@ -20,8 +21,12 @@ public class Ayat {
         return arabic;
     }
 
-    public String getTranslate() {
-        return translate;
+    public String getTranslateEng() {
+        return translateEng;
+    }
+
+    public String getTranslateUrdu() {
+        return translateUrdu;
     }
 
     public int getParahId() {
@@ -32,10 +37,11 @@ public class Ayat {
         return ayatNo;
     }
 
-    public Ayat(String arabic, String translate,int ayatNo, int surahId) {
+    public Ayat(String arabic, String translateEng, String translateUrdu,int ayatNo, int surahId) {
         this.surahId = surahId;
         this.arabic = arabic;
-        this.translate = translate;
+        this.translateEng = translateEng;
+        this.translateUrdu = translateUrdu;
         this.ayatNo = ayatNo;
     }
 }

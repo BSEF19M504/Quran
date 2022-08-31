@@ -27,8 +27,10 @@ public class AyatAdapter extends ArrayAdapter {
         TextView textView1 = convertView.findViewById(R.id.textView);
         textView1.setText(ayat.getArabic());
         TextView textView2 = convertView.findViewById(R.id.textView2);
-        textView2.setText(ayat.getTranslate());
+        textView2.setText(ayat.getTranslateEng());
         TextView textView3 = convertView.findViewById(R.id.textView3);
+        TextView textView4 = convertView.findViewById(R.id.textView4);
+        textView4.setText(ayat.getTranslateUrdu());
         String num;
         if(ayat.getSurahId() == 1)
             num = Integer.toString(ayat.getAyatNo()-1);
@@ -40,7 +42,7 @@ public class AyatAdapter extends ArrayAdapter {
             textView3.setVisibility(View.INVISIBLE);
 
         textView1.setTypeface(Typeface.createFromAsset(getContext().getAssets(), "fonts/noorehuda.ttf"));
-        textView2.setTypeface(Typeface.createFromAsset(getContext().getAssets(), "fonts/Jameel Noori Nastaleeq.ttf"));
+        textView4.setTypeface(Typeface.createFromAsset(getContext().getAssets(), "fonts/Jameel Noori Nastaleeq.ttf"));
 
         return convertView;
     }

@@ -25,9 +25,10 @@ public class QuranDAO extends SQLiteAssetHelper {
     public static final String PARAH_ID = "ParaID";
     public static final String SURAH_ID = "SuraID";
     public static final String ARABIC = "ArabicText";
-    public static final String [] TRANSLATE = {"DrMohsinKhan","FatehMuhammadJalandhri","MuftiTaqiUsmani","MehmoodulHassan"};
+    public static final String [] TRANSLATE = {"DrMohsinKhan","MuftiTaqiUsmani","FatehMuhammadJalandhri","MehmoodulHassan"};
 
-    private int Translation;
+    private int TranslationEng;
+    private int TranslationUrdu;
     //The Android's default system path of your application database.
     private static final String DATABASE_NAME = "Quran.db";
     private static final int DATABASE_VERSION = 1;
@@ -36,8 +37,9 @@ public class QuranDAO extends SQLiteAssetHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-    public void setTranslation(int translation){
-        this.Translation = translation;
+    public void setTranslation(int eng, int urdu){
+        this.TranslationEng = eng;
+        this.TranslationUrdu = urdu;
     }
     public ArrayList<SurahNames> getSurahNames() {
 
@@ -112,7 +114,8 @@ public class QuranDAO extends SQLiteAssetHelper {
         if (cursorAyat.moveToFirst()) {
             do {
                 int arabic = cursorAyat.getColumnIndex(ARABIC);
-                int translate = cursorAyat.getColumnIndex(TRANSLATE[Translation]);
+                int translateEng = cursorAyat.getColumnIndex(TRANSLATE[TranslationEng]);
+                int translateUrdu = cursorAyat.getColumnIndex(TRANSLATE[TranslationUrdu+2]);
                 int num = cursorAyat.getColumnIndex("AyaNo");
                 int ayaNo = cursorAyat.getInt(num);
                 int surah = cursorAyat.getColumnIndex(SURAH_ID);
@@ -120,7 +123,7 @@ public class QuranDAO extends SQLiteAssetHelper {
                 int ayaId = cursorAyat.getInt(Id);
                 if(ayaId == 1)
                     ayaNo = 0;
-                ayatArrayList.add(new Ayat(cursorAyat.getString(arabic),cursorAyat.getString(translate),ayaNo,cursorAyat.getInt(surah)));
+                ayatArrayList.add(new Ayat(cursorAyat.getString(arabic),cursorAyat.getString(translateEng),cursorAyat.getString(translateUrdu),ayaNo,cursorAyat.getInt(surah)));
             } while (cursorAyat.moveToNext());
 
         }
@@ -140,7 +143,8 @@ public class QuranDAO extends SQLiteAssetHelper {
             if (cursorAyat.moveToFirst()) {
                 do {
                     int arabic = cursorAyat.getColumnIndex(ARABIC);
-                    int translate = cursorAyat.getColumnIndex(TRANSLATE[Translation]);
+                    int translateEng = cursorAyat.getColumnIndex(TRANSLATE[TranslationEng]);
+                    int translateUrdu = cursorAyat.getColumnIndex(TRANSLATE[TranslationUrdu+2]);
                     int num = cursorAyat.getColumnIndex("AyaNo");
                     int ayaNo = cursorAyat.getInt(num);
                     int surah = cursorAyat.getColumnIndex(SURAH_ID);
@@ -148,7 +152,7 @@ public class QuranDAO extends SQLiteAssetHelper {
                     int ayaId = cursorAyat.getInt(Id);
                     if(ayaId == 1)
                         ayaNo = 0;
-                    ayatArrayList.add(new Ayat(cursorAyat.getString(arabic),cursorAyat.getString(translate),ayaNo,cursorAyat.getInt(surah)));
+                    ayatArrayList.add(new Ayat(cursorAyat.getString(arabic),cursorAyat.getString(translateEng),cursorAyat.getString(translateUrdu),ayaNo,cursorAyat.getInt(surah)));
                 } while (cursorAyat.moveToNext());
                 cursorAyat.close();
             }
@@ -176,8 +180,9 @@ public class QuranDAO extends SQLiteAssetHelper {
             int initial;
             cursorAyat.moveToFirst();
             initial = cursorAyat.getColumnIndex(ARABIC);
-            int translate = cursorAyat.getColumnIndex(TRANSLATE[Translation]);
-            bismillah = new Ayat(cursorAyat.getString(initial), cursorAyat.getString(translate),0,1);
+            int Eng = cursorAyat.getColumnIndex(TRANSLATE[TranslationEng]);
+            int Urdu = cursorAyat.getColumnIndex(TRANSLATE[TranslationUrdu+2]);
+            bismillah = new Ayat(cursorAyat.getString(initial), cursorAyat.getString(Eng),cursorAyat.getString(Urdu),0,1);
             for (int newID: idList.toArray(new Integer[0])) {
                 cursorAyat = db.rawQuery("SELECT * FROM " + AYAT_TABLE + " WHERE " + PARAH_ID + "" + op + "" + id + " AND " + SURAH_ID + "=" + newID + " ORDER BY " + AYAT_ID,null);
                 if (cursorAyat.moveToFirst()) {
@@ -188,7 +193,8 @@ public class QuranDAO extends SQLiteAssetHelper {
                             ayatArrayList.add(bismillah);
                         }
                         int arabic = cursorAyat.getColumnIndex(ARABIC);
-                        int translation = cursorAyat.getColumnIndex(TRANSLATE[Translation]);
+                        int translateEng = cursorAyat.getColumnIndex(TRANSLATE[TranslationEng]);
+                        int translateUrdu = cursorAyat.getColumnIndex(TRANSLATE[TranslationUrdu+2]);
                         int num = cursorAyat.getColumnIndex("AyaNo");
                         int ayaNo = cursorAyat.getInt(num);
                         int surah = cursorAyat.getColumnIndex(SURAH_ID);
@@ -196,7 +202,7 @@ public class QuranDAO extends SQLiteAssetHelper {
                         int ayaId = cursorAyat.getInt(Id);
                         if(ayaId == 1)
                             ayaNo = 0;
-                        ayatArrayList.add(new Ayat(cursorAyat.getString(arabic),cursorAyat.getString(translation),ayaNo,cursorAyat.getInt(surahId)));
+                        ayatArrayList.add(new Ayat(cursorAyat.getString(arabic),cursorAyat.getString(translateEng),cursorAyat.getString(translateUrdu),ayaNo,cursorAyat.getInt(surahId)));
                     } while (cursorAyat.moveToNext());
                 }
             }
