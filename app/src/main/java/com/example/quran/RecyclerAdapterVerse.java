@@ -1,6 +1,7 @@
 package com.example.quran;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +16,9 @@ public class RecyclerAdapterVerse extends RecyclerView.Adapter<RecyclerAdapterVe
     List<Ayat> ayatList;
     Context context;
 
-    public RecyclerAdapterVerse(Context context){
+    public RecyclerAdapterVerse(Context context, List<Ayat> ayatList){
         this.context = context;
+        this.ayatList = ayatList;
     }
 
     @NonNull
@@ -29,7 +31,23 @@ public class RecyclerAdapterVerse extends RecyclerView.Adapter<RecyclerAdapterVe
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerAdapterVerse.AyatViewHolder holder, int position) {
+        holder.data = ayatList.get(position);
 
+        holder.textView1.setText(holder.data.getArabic());
+        holder.textView2.setText(holder.data.getTranslateEng());
+        holder.textView4.setText(holder.data.getTranslateUrdu());
+        String num;
+        if(holder.data.getSurahId() == 1)
+            num = Integer.toString(holder.data.getAyatNo()-1);
+        else
+            num = Integer.toString(holder.data.getAyatNo());
+        holder.textView3.setText(num);
+
+        if(holder.data.getAyatNo() == 0)
+            holder.textView3.setVisibility(View.INVISIBLE);
+
+        holder.textView1.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/noorehuda.ttf"));
+        holder.textView4.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/Jameel Noori Nastaleeq.ttf"));
     }
 
     @Override

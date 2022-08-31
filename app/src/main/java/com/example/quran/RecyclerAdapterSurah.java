@@ -72,7 +72,7 @@ public class RecyclerAdapterSurah extends RecyclerView.Adapter<RecyclerAdapterSu
                 public void onClick(View view) {
                     final SurahNames surah = surahNamesList.get(getAdapterPosition());
                     Toast.makeText(context, Integer.toString(getAdapterPosition()), Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(context, VerseActivity.class);
+                    Intent intent = new Intent(context, NewVerseActivity.class);
                     intent.putExtra("SurahId",data.getId());
                     intent.putExtra("NameEng",data.getEng());
                     intent.putExtra("NameUrdu",data.getUrdu());
