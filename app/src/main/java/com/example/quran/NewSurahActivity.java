@@ -31,7 +31,7 @@ public class NewSurahActivity extends AppCompatActivity {
         }
 
         RecyclerView recyclerView = findViewById(R.id.surah_recycler_view);
-        RecyclerAdapterSurah recyclerAdapter = new RecyclerAdapterSurah(NewSurahActivity.this, array);
+        RecyclerAdapterSurah recyclerAdapter = new RecyclerAdapterSurah(NewSurahActivity.this, array,translateEng,translateUrdu,key);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(NewSurahActivity.this);
 
         recyclerView.setAdapter(recyclerAdapter);
