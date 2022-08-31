@@ -76,6 +76,24 @@ public class StartingActivity extends AppCompatActivity {
                         startActivity(intent);
                         drawerLayout.closeDrawer(GravityCompat.START);
                         break;
+
+                    case R.id.surah_list_new:
+                        intent = new Intent(StartingActivity.this, NewSurahActivity.class);
+                        intent.putExtra("key","Surah");
+                        intent.putExtra("translateEng",eng);
+                        intent.putExtra("translateUrdu",urdu);
+                        startActivity(intent);
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        break;
+
+                    case R.id.parah_list_new:
+                        intent = new Intent(StartingActivity.this, NewSurahActivity.class);
+                        intent.putExtra("key","Parah");
+                        intent.putExtra("translateEng",eng);
+                        intent.putExtra("translateUrdu",urdu);
+                        startActivity(intent);
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        break;
                 }
 
                 return false;

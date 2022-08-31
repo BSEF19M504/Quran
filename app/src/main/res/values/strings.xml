@@ -3,7 +3,7 @@
     <string name="al_quran">Al-Quran</string>
     <string name="open">Opening</string>
     <string name="close">Closing</string>
-    <string name="readability">Readability</string>
+    <string name="readability">Translations</string>
     <string name="translation_english">Translation English</string>
     <string name="translation_urdu">Translation Urdu</string>
     <string name="parah_list">Parah List</string>
@@ -14,4 +14,6 @@
     <string name="author">Author</string>
     <string name="name">Muhammad Nauman Sheikh</string>
     <string name="roll_no">BSEF19M504</string>
+    <string name="old_version">Old Version</string>
+    <string name="new_version">New Version</string>
 </resources>

@@ -2,18 +2,39 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/surah_list"
-            android:title="@string/surah_list" />
-        <!--android:icon="@drawable/book" -->
+    <item android:title="@string/old_version">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/surah_list"
+                    android:title="@string/surah_list" />
+                <!--android:icon="@drawable/book" -->
 
-        <item
-            android:id="@+id/parah_list"
-            android:title="@string/parah_list" />
-        <!--android:icon="@drawable/return"-->
+                <item
+                    android:id="@+id/parah_list"
+                    android:title="@string/parah_list" />
+                <!--android:icon="@drawable/return"-->
 
-    </group>
+            </group>
+        </menu>
+    </item>
+
+    <item android:title="@string/new_version">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/surah_list_new"
+                    android:title="@string/surah_list" />
+                <!--android:icon="@drawable/book" -->
+
+                <item
+                    android:id="@+id/parah_list_new"
+                    android:title="@string/parah_list" />
+                <!--android:icon="@drawable/return"-->
+
+            </group>
+        </menu>
+    </item>
 
 
     <item android:title="@string/readability">
