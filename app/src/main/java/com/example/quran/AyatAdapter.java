@@ -59,6 +59,8 @@ public class AyatAdapter extends ArrayAdapter {
         if(ayat.getAyatNo() == 0)
         {
             textView3.setVisibility(View.INVISIBLE);
+            checkBox.setChecked(false);
+            checkBox.setVisibility(View.INVISIBLE);
         }
 
         textView1.setTypeface(Typeface.createFromAsset(getContext().getAssets(), "fonts/noorehuda.ttf"));

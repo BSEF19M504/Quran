@@ -59,8 +59,11 @@ public class RecyclerAdapterVerse extends RecyclerView.Adapter<RecyclerAdapterVe
             num = Integer.toString(holder.data.getAyatNo());
         holder.textView3.setText(num);
 
-        if(holder.data.getAyatNo() == 0)
+        if(holder.data.getAyatNo() == 0) {
             holder.textView3.setVisibility(View.INVISIBLE);
+            holder.checkBox.setChecked(false);
+            holder.checkBox.setVisibility(View.INVISIBLE);
+        }
 
         holder.textView1.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/noorehuda.ttf"));
         holder.textView4.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/Jameel Noori Nastaleeq.ttf"));
