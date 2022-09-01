@@ -94,6 +94,14 @@ public class StartingActivity extends AppCompatActivity {
                         startActivity(intent);
                         drawerLayout.closeDrawer(GravityCompat.START);
                         break;
+
+                    case R.id.bookmark_list:
+                        intent = new Intent(StartingActivity.this, BookmarkActivity.class);
+                        intent.putExtra("translateEng",eng);
+                        intent.putExtra("translateUrdu",urdu);
+                        startActivity(intent);
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        break;
                 }
 
                 return false;

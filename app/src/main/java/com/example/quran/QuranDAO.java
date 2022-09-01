@@ -42,6 +42,7 @@ public class QuranDAO extends SQLiteAssetHelper {
         this.TranslationEng = eng;
         this.TranslationUrdu = urdu;
     }
+
     public ArrayList<SurahNames> getSurahNames() {
 
         SQLiteDatabase db = this.getReadableDatabase();
@@ -68,6 +69,34 @@ public class QuranDAO extends SQLiteAssetHelper {
 
         cursorSurah.close();
         return surahArrayList;
+    }
+
+    public SurahNames getSurahById(int surahId) {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursorSurah = db.rawQuery("SELECT * FROM " + SURAH_TABLE + " WHERE SurahID="+surahId, null);
+
+        SurahNames surah ;
+
+        // moving our cursor to first position.
+        if (cursorSurah.moveToFirst()) {
+            int nameE, nameU, id;
+            nameU = cursorSurah.getColumnIndex("SurahNameU");
+            nameE = cursorSurah.getColumnIndex("SurahNameE");
+            id = cursorSurah.getColumnIndex("SurahID");
+            String nameEng = cursorSurah.getString(nameE);
+            nameEng = nameEng.split("\\(")[0];
+            surah = new SurahNames(cursorSurah.getString(nameU),
+                    nameEng,
+                    cursorSurah.getInt(id));
+        }
+        else{
+            surah = null;
+        }
+
+        cursorSurah.close();
+        return surah;
     }
 
     public ArrayList<SurahNames> getParahNames() {
@@ -234,5 +263,30 @@ public class QuranDAO extends SQLiteAssetHelper {
 
         cv.put(BOOKMARK, 0);
         db.update(AYAT_TABLE,cv,SURAH_ID +"="+surahId+" AND AyaNo="+ayaNo,null);
+    }
+
+    public ArrayList<Ayat> getAyatByBookmark(){
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursorAyat = db.rawQuery("SELECT "+ARABIC+", "+SURAH_ID+", SurahNameU, AyaNo FROM " + AYAT_TABLE + ","+SURAH_TABLE+" WHERE " + BOOKMARK + "=1 AND "+SURAH_ID+"=SurahID ORDER BY " + AYAT_ID,null);
+
+        ArrayList<Ayat> ayatArrayList = new ArrayList<>();
+
+        // moving our cursor to first position.
+        if (cursorAyat.moveToFirst()) {
+            do {
+                int arabic = cursorAyat.getColumnIndex(ARABIC);
+                int nameUrdu = cursorAyat.getColumnIndex("SurahNameU");
+                int num = cursorAyat.getColumnIndex("AyaNo");
+                int ayaNo = cursorAyat.getInt(num);
+                int surah = cursorAyat.getColumnIndex(SURAH_ID);
+
+                ayatArrayList.add(new Ayat(cursorAyat.getString(arabic),null,cursorAyat.getString(nameUrdu),ayaNo,cursorAyat.getInt(surah),true));
+            } while (cursorAyat.moveToNext());
+
+        }
+
+        cursorAyat.close();
+        return ayatArrayList;
     }
 }

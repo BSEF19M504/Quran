@@ -23,6 +23,7 @@ public class VerseActivity extends AppCompatActivity {
         int translateUrdu = intent.getIntExtra("translateUrdu",0);
         String nameEng = intent.getStringExtra("NameEng");
         String nameUrdu = intent.getStringExtra("NameUrdu");
+        int index = intent.getIntExtra("StaringIndex",0);
 
         String key = intent.getStringExtra("key");
         QuranDAO quranDAO = new QuranDAO(this);
@@ -42,5 +43,6 @@ public class VerseActivity extends AppCompatActivity {
         AyatAdapter arrayAdapter = new AyatAdapter(VerseActivity.this, android.R.layout.simple_list_item_1,verses);
         ListView listView = findViewById(R.id.listVerse);
         listView.setAdapter(arrayAdapter);
+        listView.setSelection(index);
     }
 }

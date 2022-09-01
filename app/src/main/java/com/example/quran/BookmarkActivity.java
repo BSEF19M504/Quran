@@ -4,10 +4,21 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BookmarkActivity extends AppCompatActivity {
+    ListView listView;
+    BookmarkAdapter bookmarkAdapter;
+    @Override
+    protected void onResume() {
+        super.onResume();
+        listView.setAdapter(new BookmarkAdapter(getApplicationContext(), android.R.layout.simple_list_item_1,new QuranDAO(getApplicationContext()).getAyatByBookmark()));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,15 +27,36 @@ public class BookmarkActivity extends AppCompatActivity {
 
         QuranDAO quranDAO = new QuranDAO(this);
         Intent intent = getIntent();
-        String key = intent.getStringExtra("key");
         int translateEng = intent.getIntExtra("translateEng",0);
         int translateUrdu = intent.getIntExtra("translateUrdu",0);
-        List<SurahNames> array;
-        if(key.equals("Surah")){
-            array = quranDAO.getSurahNames();
-        }
-        else{
-            array = quranDAO.getParahNames();
-        }
+        List<Ayat> array;
+        array = quranDAO.getAyatByBookmark();
+
+        listView = findViewById(R.id.listBookmarks);
+        bookmarkAdapter = new BookmarkAdapter(BookmarkActivity.this, android.R.layout.simple_list_item_1,array);
+        listView.setAdapter(bookmarkAdapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Ayat ayat = (Ayat) adapterView.getItemAtPosition(i);
+                int id = ayat.getSurahId();
+                SurahNames surah = quranDAO.getSurahById(id);
+
+                Intent intent = new Intent(BookmarkActivity.this, VerseActivity.class);
+                intent.putExtra("SurahId",surah.getId());
+                intent.putExtra("NameEng",surah.getEng());
+                intent.putExtra("NameUrdu",surah.getUrdu());
+                intent.putExtra("translateEng",translateEng);
+                intent.putExtra("translateUrdu",translateUrdu);
+                intent.putExtra("key","Surah");
+                if(surah.getId() == 1)
+                    intent.putExtra("StaringIndex", ayat.getAyatNo()-1);
+                else
+                    intent.putExtra("StaringIndex", ayat.getAyatNo());
+                startActivity(intent);
+            }
+        });
+
     }
 }
