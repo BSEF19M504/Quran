@@ -40,7 +40,7 @@ public class NewVerseActivity extends AppCompatActivity {
         TextView textView1 = findViewById(R.id.verseTitleUrdu);
         textView1.setText(nameUrdu);
 
-        RecyclerView recyclerView = findViewById(R.id.surah_recycler_view);
+        RecyclerView recyclerView = findViewById(R.id.ayat_recycler_view);
         RecyclerAdapterVerse recyclerAdapter = new RecyclerAdapterVerse(NewVerseActivity.this, verses);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(NewVerseActivity.this);
 
