@@ -6,16 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".NewSurahActivity">
 
-    <TextView
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/title_new"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:text="@string/al_quran"
-        android:textSize="24sp"
-        android:textAlignment="center"/>
+        app:title="@string/al_quran"
+        app:titleTextColor="@color/cardview_light_background"
+        android:background="@color/purple_700" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/surah_recycler_view"

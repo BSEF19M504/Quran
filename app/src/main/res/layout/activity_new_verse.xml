@@ -9,23 +9,29 @@
     <TextView
         android:id="@+id/verseTitleEng"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:gravity="center"
         android:text="@string/al_quran"
         android:textSize="24sp"
-        android:layout_marginStart="50dp"
+        android:textAlignment="center"
         app:layout_constraintEnd_toStartOf="@+id/verseTitleUrdu"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@color/white"
+        android:background="@color/purple_700"/>
 
     <TextView
         android:id="@+id/verseTitleUrdu"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:gravity="center"
         android:text="@string/al_quran"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/verseTitleEng"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@color/white"
+        android:background="@color/purple_700" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/ayat_recycler_view"
