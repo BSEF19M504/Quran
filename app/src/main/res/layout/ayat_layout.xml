@@ -50,8 +50,24 @@
         android:layout_marginStart="10dp"
         android:text=""
         android:textSize="24sp"
+        app:layout_constraintVertical_bias="0.2"
         app:layout_constraintBottom_toBottomOf="@+id/textView4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView" />
+
+    <CheckBox
+        android:id="@+id/star"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/textView"
+        app:layout_constraintBottom_toBottomOf="@id/textView4"
+        android:layout_marginStart="-10dp"
+        app:layout_constraintVertical_bias="0.8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:button="@drawable/checkbox_selector"
+        android:clickable="true"
+        android:focusable="true"
+        android:scaleX="0.7"
+        android:scaleY="0.7"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
