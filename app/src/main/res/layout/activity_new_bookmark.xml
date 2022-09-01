@@ -16,6 +16,14 @@
         app:titleTextColor="@color/cardview_light_background"
         android:background="@color/purple_700" />
 
+    <TextView
+        android:id="@+id/emptyText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/title_new"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/bookmark_recycler_view"
         android:layout_width="match_parent"

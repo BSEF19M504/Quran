@@ -1,6 +1,7 @@
 package com.example.quran;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,10 +17,14 @@ import java.util.List;
 public class RecyclerAdapterBookmark extends RecyclerView.Adapter<RecyclerAdapterBookmark.BookmarkViewHolder> {
     List<Ayat> ayatList;
     Context context;
+    int translateUrdu;
+    int translateEng;
 
-    public RecyclerAdapterBookmark(Context context, List<Ayat> ayatList){
+    public RecyclerAdapterBookmark(Context context, List<Ayat> ayatList, int eng, int urdu){
         this.context = context;
         this.ayatList = ayatList;
+        this.translateEng = eng;
+        this.translateUrdu = urdu;
     }
 
     @NonNull
@@ -78,6 +83,30 @@ public class RecyclerAdapterBookmark extends RecyclerView.Adapter<RecyclerAdapte
             textView2 = itemView.findViewById(R.id.textView2);
             textView3 = itemView.findViewById(R.id.textView3);
             checkBox = itemView.findViewById(R.id.star);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Ayat ayat = (Ayat) ayatList.get(getAdapterPosition());
+                    int id = ayat.getSurahId();
+                    QuranDAO quranDAO = new QuranDAO(context);
+                    SurahNames surah = quranDAO.getSurahById(id);
+
+                    Intent intent = new Intent(context, NewVerseActivity.class);
+                    intent.putExtra("SurahId",surah.getId());
+                    intent.putExtra("NameEng",surah.getEng());
+                    intent.putExtra("NameUrdu",surah.getUrdu());
+                    intent.putExtra("translateEng",translateEng);
+                    intent.putExtra("translateUrdu",translateUrdu);
+                    intent.putExtra("key","Surah");
+                    if(surah.getId() == 1)
+                        intent.putExtra("StaringIndex", ayat.getAyatNo()-1);
+                    else
+                        intent.putExtra("StaringIndex", ayat.getAyatNo());
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 }

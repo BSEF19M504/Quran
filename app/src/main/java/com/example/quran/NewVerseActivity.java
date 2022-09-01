@@ -23,6 +23,7 @@ public class NewVerseActivity extends AppCompatActivity {
         int translateUrdu = intent.getIntExtra("translateUrdu",0);
         String nameEng = intent.getStringExtra("NameEng");
         String nameUrdu = intent.getStringExtra("NameUrdu");
+        int index = intent.getIntExtra("StaringIndex",0);
 
         String key = intent.getStringExtra("key");
         QuranDAO quranDAO = new QuranDAO(this);
@@ -46,5 +47,6 @@ public class NewVerseActivity extends AppCompatActivity {
 
         recyclerView.setAdapter(recyclerAdapter);
         recyclerView.setLayoutManager(layoutManager);
+        recyclerView.scrollToPosition(index);
     }
 }
