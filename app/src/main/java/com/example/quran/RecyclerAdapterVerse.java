@@ -5,6 +5,8 @@ import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -36,6 +38,20 @@ public class RecyclerAdapterVerse extends RecyclerView.Adapter<RecyclerAdapterVe
         holder.textView1.setText(holder.data.getArabic());
         holder.textView2.setText(holder.data.getTranslateEng());
         holder.textView4.setText(holder.data.getTranslateUrdu());
+
+        holder.checkBox.setChecked(holder.data.isBookmark());
+        holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                QuranDAO quranDAO = new QuranDAO(context);
+                if(b){
+                    quranDAO.setBookmark(holder.data.getSurahId(),holder.data.getAyatNo());
+                }
+                else{
+                    quranDAO.unsetBookmark(holder.data.getSurahId(),holder.data.getAyatNo());
+                }
+            }
+        });
         String num;
         if(holder.data.getSurahId() == 1)
             num = Integer.toString(holder.data.getAyatNo()-1);
@@ -61,6 +77,7 @@ public class RecyclerAdapterVerse extends RecyclerView.Adapter<RecyclerAdapterVe
         TextView textView2;
         TextView textView3;
         TextView textView4;
+        CheckBox checkBox;
         Ayat data;
 
         public AyatViewHolder(@NonNull View itemView) {
@@ -69,6 +86,7 @@ public class RecyclerAdapterVerse extends RecyclerView.Adapter<RecyclerAdapterVe
             textView2 = itemView.findViewById(R.id.textView2);
             textView3 = itemView.findViewById(R.id.textView3);
             textView4 = itemView.findViewById(R.id.textView4);
+            checkBox = itemView.findViewById(R.id.star);
         }
     }
 }
