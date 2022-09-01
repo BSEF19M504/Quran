@@ -25,6 +25,7 @@ public class QuranDAO extends SQLiteAssetHelper {
     public static final String PARAH_ID = "ParaID";
     public static final String SURAH_ID = "SuraID";
     public static final String ARABIC = "ArabicText";
+    public static final String BOOKMARK = "Bookmark";
     public static final String [] TRANSLATE = {"DrMohsinKhan","MuftiTaqiUsmani","FatehMuhammadJalandhri","MehmoodulHassan"};
 
     private int TranslationEng;
@@ -123,7 +124,10 @@ public class QuranDAO extends SQLiteAssetHelper {
                 int ayaId = cursorAyat.getInt(Id);
                 if(ayaId == 1)
                     ayaNo = 0;
-                ayatArrayList.add(new Ayat(cursorAyat.getString(arabic),cursorAyat.getString(translateEng),cursorAyat.getString(translateUrdu),ayaNo,cursorAyat.getInt(surah)));
+
+                int bookMarkCol = cursorAyat.getColumnIndex(BOOKMARK);
+                boolean bookmark = cursorAyat.getInt(bookMarkCol) != 0;
+                ayatArrayList.add(new Ayat(cursorAyat.getString(arabic),cursorAyat.getString(translateEng),cursorAyat.getString(translateUrdu),ayaNo,cursorAyat.getInt(surah),bookmark));
             } while (cursorAyat.moveToNext());
 
         }
@@ -152,7 +156,9 @@ public class QuranDAO extends SQLiteAssetHelper {
                     int ayaId = cursorAyat.getInt(Id);
                     if(ayaId == 1)
                         ayaNo = 0;
-                    ayatArrayList.add(new Ayat(cursorAyat.getString(arabic),cursorAyat.getString(translateEng),cursorAyat.getString(translateUrdu),ayaNo,cursorAyat.getInt(surah)));
+                    int bookMarkCol = cursorAyat.getColumnIndex(BOOKMARK);
+                    boolean bookmark = cursorAyat.getInt(bookMarkCol) != 0;
+                    ayatArrayList.add(new Ayat(cursorAyat.getString(arabic),cursorAyat.getString(translateEng),cursorAyat.getString(translateUrdu),ayaNo,cursorAyat.getInt(surah),bookmark));
                 } while (cursorAyat.moveToNext());
                 cursorAyat.close();
             }
@@ -182,7 +188,7 @@ public class QuranDAO extends SQLiteAssetHelper {
             initial = cursorAyat.getColumnIndex(ARABIC);
             int Eng = cursorAyat.getColumnIndex(TRANSLATE[TranslationEng]);
             int Urdu = cursorAyat.getColumnIndex(TRANSLATE[TranslationUrdu+2]);
-            bismillah = new Ayat(cursorAyat.getString(initial), cursorAyat.getString(Eng),cursorAyat.getString(Urdu),0,1);
+            bismillah = new Ayat(cursorAyat.getString(initial), cursorAyat.getString(Eng),cursorAyat.getString(Urdu),0,1,false);
             for (int newID: idList.toArray(new Integer[0])) {
                 cursorAyat = db.rawQuery("SELECT * FROM " + AYAT_TABLE + " WHERE " + PARAH_ID + "" + op + "" + id + " AND " + SURAH_ID + "=" + newID + " ORDER BY " + AYAT_ID,null);
                 if (cursorAyat.moveToFirst()) {
@@ -202,7 +208,9 @@ public class QuranDAO extends SQLiteAssetHelper {
                         int ayaId = cursorAyat.getInt(Id);
                         if(ayaId == 1)
                             ayaNo = 0;
-                        ayatArrayList.add(new Ayat(cursorAyat.getString(arabic),cursorAyat.getString(translateEng),cursorAyat.getString(translateUrdu),ayaNo,cursorAyat.getInt(surahId)));
+                        int bookMarkCol = cursorAyat.getColumnIndex(BOOKMARK);
+                        boolean bookmark = !(cursorAyat.getInt(bookMarkCol) == 0);
+                        ayatArrayList.add(new Ayat(cursorAyat.getString(arabic),cursorAyat.getString(translateEng),cursorAyat.getString(translateUrdu),ayaNo,cursorAyat.getInt(surahId),bookmark));
                     } while (cursorAyat.moveToNext());
                 }
             }
@@ -210,5 +218,21 @@ public class QuranDAO extends SQLiteAssetHelper {
         }
 
         return ayatArrayList;
+    }
+
+    public void setBookmark(int surahId, int ayaNo){
+        SQLiteDatabase db = this.getReadableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(BOOKMARK, 1);
+        db.update(AYAT_TABLE,cv,SURAH_ID +"="+surahId+" AND AyaNo="+ayaNo,null);
+    }
+
+    public void unsetBookmark(int surahId, int ayaNo){
+        SQLiteDatabase db = this.getReadableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(BOOKMARK, 0);
+        db.update(AYAT_TABLE,cv,SURAH_ID +"="+surahId+" AND AyaNo="+ayaNo,null);
     }
 }

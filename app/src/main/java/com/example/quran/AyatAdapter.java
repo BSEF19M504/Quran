@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -31,6 +33,22 @@ public class AyatAdapter extends ArrayAdapter {
         TextView textView3 = convertView.findViewById(R.id.textView3);
         TextView textView4 = convertView.findViewById(R.id.textView4);
         textView4.setText(ayat.getTranslateUrdu());
+
+        CheckBox checkBox = convertView.findViewById(R.id.star);
+        checkBox.setChecked(ayat.isBookmark());
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                QuranDAO quranDAO = new QuranDAO(getContext());
+                if(b){
+                    quranDAO.setBookmark(ayat.getSurahId(),ayat.getAyatNo());
+                }
+                else{
+                    quranDAO.unsetBookmark(ayat.getSurahId(),ayat.getAyatNo());
+                }
+            }
+        });
+
         String num;
         if(ayat.getSurahId() == 1)
             num = Integer.toString(ayat.getAyatNo()-1);
@@ -39,7 +57,9 @@ public class AyatAdapter extends ArrayAdapter {
         textView3.setText(num);
 
         if(ayat.getAyatNo() == 0)
+        {
             textView3.setVisibility(View.INVISIBLE);
+        }
 
         textView1.setTypeface(Typeface.createFromAsset(getContext().getAssets(), "fonts/noorehuda.ttf"));
         textView4.setTypeface(Typeface.createFromAsset(getContext().getAssets(), "fonts/Jameel Noori Nastaleeq.ttf"));

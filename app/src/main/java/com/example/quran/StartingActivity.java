@@ -106,13 +106,11 @@ public class StartingActivity extends AppCompatActivity {
     public void onBackPressed(){
         if(drawerLayout.isDrawerOpen(GravityCompat.START)){
             drawerLayout.closeDrawer(GravityCompat.START);
-            Toast.makeText(getApplicationContext(),"Start", Toast.LENGTH_LONG).show();
 
         }
         else
         {
             super.onBackPressed();
-            Toast.makeText(getApplicationContext(),"End",Toast.LENGTH_LONG).show();
         }
     }
 }

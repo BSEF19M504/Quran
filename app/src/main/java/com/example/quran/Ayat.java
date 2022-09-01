@@ -8,6 +8,11 @@ public class Ayat {
     private String translateUrdu;
     private int parahId;
     private int ayatNo;
+    private boolean bookmark;
+
+    public boolean isBookmark() {
+        return bookmark;
+    }
 
     public int getAyatId() {
         return ayatId;
@@ -37,11 +42,12 @@ public class Ayat {
         return ayatNo;
     }
 
-    public Ayat(String arabic, String translateEng, String translateUrdu,int ayatNo, int surahId) {
+    public Ayat(String arabic, String translateEng, String translateUrdu,int ayatNo, int surahId, boolean bookmark) {
         this.surahId = surahId;
         this.arabic = arabic;
         this.translateEng = translateEng;
         this.translateUrdu = translateUrdu;
         this.ayatNo = ayatNo;
+        this.bookmark = bookmark;
     }
 }
