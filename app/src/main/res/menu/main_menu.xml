@@ -8,12 +8,14 @@
                 <item
                     android:id="@+id/surah_list"
                     android:title="@string/surah_list" />
-                <!--android:icon="@drawable/book" -->
 
                 <item
                     android:id="@+id/parah_list"
                     android:title="@string/parah_list" />
-                <!--android:icon="@drawable/return"-->
+
+                <item
+                    android:id="@+id/bookmark_list"
+                    android:title="@string/bookmarks" />
 
             </group>
         </menu>
@@ -25,12 +27,14 @@
                 <item
                     android:id="@+id/surah_list_new"
                     android:title="@string/surah_list" />
-                <!--android:icon="@drawable/book" -->
 
                 <item
                     android:id="@+id/parah_list_new"
                     android:title="@string/parah_list" />
-                <!--android:icon="@drawable/return"-->
+
+                <item
+                    android:id="@+id/bookmark_list_new"
+                    android:title="@string/bookmarks" />
 
             </group>
         </menu>
@@ -44,12 +48,10 @@
                     android:id="@+id/translate_eng"
                     android:title="@string/translation_english"
                     app:actionLayout="@layout/spinner"/>
-                <!--android:icon="@drawable/chrome_reader"-->
                 <item
                     android:id="@+id/translate_urdu"
                     android:title="@string/translation_urdu"
                     app:actionLayout="@layout/spinner"/>
-                <!--android:icon="@drawable/read_more"-->
             </group>
         </menu>
     </item>
