@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -20,8 +21,8 @@ public class NewBookmarkActivity extends AppCompatActivity {
         super.onResume();
         ArrayList<Ayat> ayatArrayList = new QuranDAO(getApplicationContext()).getAyatByBookmark();
         if(ayatArrayList.isEmpty()){
-            TextView textView = findViewById(R.id.emptyText);
-            textView.setText("No bookmarks saved!");
+            ListView listView = findViewById(R.id.listBookmarks);
+            listView.setAdapter(new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1,new String[] {"No bookmarks saved!"}));
             recyclerView.setAdapter(new RecyclerAdapterBookmark(getApplicationContext(),new ArrayList<>(),0,0));
         }
         else{
